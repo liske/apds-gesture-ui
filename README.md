@@ -31,23 +31,60 @@ following MQTT settings:
 
 ## Install
 
-The *python-apds9960* package requires *python-smbus* which should be installed using your package manager:
+### Prerequisites
+
+Install *git* and *python-smbus*:
+
 ```console
-# apt-get install python-smbus
+# apt-get install git python-smbus
 ```
+
+### Download source
+
+```console
+# git clone --recursive https://github.com/liske/apds-gesture-ui.git /opt/apds-gesture-ui
+```
+
+### Kernel module
+
+The *apds-gesture-ui* and the *apds-gesture-ui-sub* scripts require the kernel module *uinput.ko* to be loaded:
+
+```console
+# modprobe uinput
+```
+
+Put `uinput` into `/etc/modules` to load the module during system boot automaticly.
+
+
+### Python modules
 
 It is recommended to create a dedicated [virtualenv](https://virtualenv.pypa.io/en/stable/userguide/) where
 the python modules required by *apds-gesture-uid* will be installed:
+- create new virtualenv
+```console
+# virtualenv --system-site-packages /opt/apds-gesture-ui/venv
+```
+- enter the virtualenv
+```console
+# . /opt/apds-gesture-ui/venv/bin/activate
+```
+- install Python-uinput
+```console
+# pip install python-uinput
+```
+- install Paho MQTT python client (optional)
+```console
+# pip install paho-mqtt
+```
 
-```bash
-# create empty virtualenv
-$ virtualenv --system-site-packages /path/to/env
-# enter the virtualenv
-$ . /path/to/env/bin/activate
+### System service
 
-# install SMBus
-$ pip install python-uinput
+This project contains example systemd.service files (see [ex/](ex/)). For activation copy the service file to
+`/etc/systemd/system/` and change the containing paths to match you environment:
 
-# install Paho MQTT python client (optional)
-$ pip install paho-mqtt
+```console
+# cp ex/apds-gesture-ui.service /etc/systemd/system/
+# systemctl daemon-reload
+# systemctl start apds-gesture-ui.service
+# systemctl status apds-gesture-ui.service
 ```

@@ -3,4 +3,7 @@ Description=APDS-9960 Gesture UI Service
 
 [Service]
 Type=simple
-ExecStart=/usr/sbin/apds-gesture-ui
+ExecStart=/opt/apds-gesture-ui/venv/bin/python /opt/apds-gesture-ui/src/apds-gesture-ui
+WorkingDirectory=/opt/apds-gesture-ui/src/
+Restart=always
+RestartSec=30

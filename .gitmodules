@@ -1,0 +1,4 @@
+[submodule "lib/python-apds9960"]
+	path = lib/python-apds9960
+	url = https://github.com/liske/python-apds9960.git
+	branch = master
