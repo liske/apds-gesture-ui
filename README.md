@@ -21,3 +21,33 @@ The python configuration file is `/etc/gesture-ui.conf`. The following settings 
 - __I2C_PORT__ - the SMBus port number
 - __GMAPPINGS__ - defines which gesture direction should trigger which key presses
 - __POLLING_SLEEP__ - sleep between polling for new gesture recognition events
+
+If the MQTT bridge modus is used, *apds-gesture-uid-pub* and *apds-gesture-uid-sub* are using the
+following MQTT settings:
+- __MQTT_HOST__ - the MQTT broker hostname or ip address
+- __MQTT_OPTS__ - connection options (see also Paho MQTT python client)
+- __MQTT_TOPIC__ - the MQTT topic used for publish and subscribe
+
+
+## Install
+
+The *python-apds9960* package requires *python-smbus* which should be installed using your package manager:
+```console
+# apt-get install python-smbus
+```
+
+It is recommended to create a dedicated [virtualenv](https://virtualenv.pypa.io/en/stable/userguide/) where
+the python modules required by *apds-gesture-uid* will be installed:
+
+```bash
+# create empty virtualenv
+$ virtualenv --system-site-packages /path/to/env
+# enter the virtualenv
+$ . /path/to/env/bin/activate
+
+# install SMBus
+$ pip install python-uinput
+
+# install Paho MQTT python client (optional)
+$ pip install paho-mqtt
+```
