@@ -1,0 +1,57 @@
+#!/usr/bin/env python
+
+from apds9960.const import *
+import argparse
+import imp
+import json
+import uinput
+import logging
+import paho.mqtt.client as mqtt
+
+# enable logging
+logging.basicConfig(format='%(asctime)s %(module)s %(levelname)s: %(message)s', level=logging.INFO)
+
+# parse opts and load config
+parser = argparse.ArgumentParser()
+parser.add_argument("-c", "--config", help="config file", default="/etc/apds-gesture-ui.conf")
+args = parser.parse_args()
+config = imp.load_source("apds_gesture_ui_conf", args.config)
+
+# direction to string
+dirs = {
+    APDS9960_DIR_NONE: "none",
+    APDS9960_DIR_LEFT: "left",
+    APDS9960_DIR_RIGHT: "right",
+    APDS9960_DIR_UP: "up",
+    APDS9960_DIR_DOWN: "down",
+    APDS9960_DIR_NEAR: "near",
+    APDS9960_DIR_FAR: "far",
+}
+
+# declare simulated keys
+dev = uinput.Device(config.GMAPPINGS.values())
+
+# MQTT client
+mqttc = mqtt.Client()
+
+# subscribe to MQTT topics on connect
+def on_connect(client, userdata, flags, rc):
+    logging.info("MQTT client is now connected")
+    client.subscribe(config.MQTT_TOPIC)
+
+# handle publish messages
+def on_message(client, userdata, msg):
+    gesture = json.loads(msg.payload.decode('utf-8'), object_hook=lambda d: argparse.Namespace(**d))
+    logging.info("MQTT => {}".format(gesture.name))
+
+    key = config.GMAPPINGS.get(gesture.id, None)
+    if key is not None:
+        dev.emit_click(key)
+
+# setup MQTT connection
+mqttc.on_connect = on_connect
+mqttc.on_message = on_message
+mqttc.connect(config.MQTT_HOST, **config.MQTT_OPTS)
+
+# wait for MQTT events
+mqttc.loop_forever()
