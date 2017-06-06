@@ -1,0 +1,6 @@
+[Unit]
+Description=APDS-9960 Gesture UI Service (MQTT Publisher)
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/apds-gesture-ui-pub

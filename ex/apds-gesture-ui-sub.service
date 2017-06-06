@@ -1,0 +1,6 @@
+[Unit]
+Description=APDS-9960 Gesture UI Service (MQTT Subscriber)
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/apds-gesture-ui-sub
