@@ -14,9 +14,9 @@ logging.basicConfig(format='%(asctime)s %(module)s %(levelname)s: %(message)s', 
 
 # parse opts and load config
 parser = argparse.ArgumentParser()
-parser.add_argument("-c", "--config", help="config file", default="/etc/gesture-ui.conf")
+parser.add_argument("-c", "--config", help="config file", default="/etc/apds-gesture-ui.conf")
 args = parser.parse_args()
-config = imp.load_source("gesture_ui_conf", args.config)
+config = imp.load_source("apds_gesture_ui_conf", args.config)
 
 # setup SMBus
 bus = smbus.SMBus(config.I2C_PORT)
