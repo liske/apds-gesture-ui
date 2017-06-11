@@ -33,6 +33,9 @@ following MQTT settings:
 
 ### Prerequisites
 
+On *Raspberry Pi* you need to enable the I²C bus. See also the [documentation](https://github.com/liske/python-apds9960/blob/master/RPi.md)
+at the the *python-apds9960* module.
+
 Install *git*, *python-smbus* and *virtualenv*:
 
 ```console
