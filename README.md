@@ -33,10 +33,10 @@ following MQTT settings:
 
 ### Prerequisites
 
-Install *git* and *python-smbus*:
+Install *git*, *python-smbus* and *virtualenv*:
 
 ```console
-# apt-get install git python-smbus
+# apt-get install git python-smbus virtualenv
 ```
 
 ### Download source
@@ -79,7 +79,7 @@ the python modules required by *apds-gesture-uid* will be installed:
 
 ### System service
 
-This project contains example systemd.service files (see [ex/](ex/)). For activation copy the service file to
+This project contains example *systemd.service* files (see [ex/](ex/)). For activation copy the service file to
 `/etc/systemd/system/` and change the containing paths to match you environment:
 
 ```console
