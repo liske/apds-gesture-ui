@@ -83,7 +83,7 @@ This project contains example *systemd.service* files (see [ex/](ex/)). For acti
 `/etc/systemd/system/` and change the containing paths to match you environment:
 
 ```console
-# cp ex/apds-gesture-ui.service /etc/systemd/system/
+# cp /opt/apds-gesture-ui/ex/apds-gesture-ui.service /etc/systemd/system/
 # systemctl daemon-reload
 # systemctl start apds-gesture-ui.service
 # systemctl status apds-gesture-ui.service
