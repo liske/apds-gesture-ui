@@ -25,7 +25,7 @@ The python configuration file is `/etc/gesture-ui.conf`. The following settings 
 If the MQTT bridge modus is used, *apds-gesture-uid-pub* and *apds-gesture-uid-sub* are using the
 following MQTT settings:
 - __MQTT_HOST__ - the MQTT broker hostname or ip address
-- __MQTT_OPTS__ - connection options (see also Paho MQTT python client)
+- __MQTT_OPTS__ - connection options (see also [connect](https://eclipse.org/paho/clients/python/docs/#connect-reconnect-disconnect) method of the Paho MQTT python client)
 - __MQTT_TOPIC__ - the MQTT topic used for publish and subscribe
 
 
