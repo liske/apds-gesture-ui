@@ -77,6 +77,14 @@ the python modules required by *apds-gesture-uid* will be installed:
 # pip install paho-mqtt
 ```
 
+### Configuration
+
+Copy the [example default config](ex/apds-gesture-ui.conf) file and customize it:
+
+```console
+# cp /opt/apds-gesture-ui/ex/apds-gesture-ui.conf /etc/
+```
+
 ### System service
 
 This project contains example *systemd.service* files (see [ex/](ex/)). For activation copy the service file to
